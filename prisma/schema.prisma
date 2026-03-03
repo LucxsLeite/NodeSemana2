@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/@types/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Usuario {
+  id        Int       @id @default(autoincrement())
+  publicId  String    @unique @default(uuid()) @map("public_id")
+  nome      String
+  email     String    @unique
+  senhaHash String    @map("senha_hash")
+  foto      String?
+
+  posts   Post[]
+  coments Coment[]
+  likes   Like[]
+
+  @@map("users")
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  publicId  String   @unique @default(uuid()) @map("public_id")
+  titulo    String
+  conteudo  String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  usuarioId Int     @map("usuario_id")
+  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  coments Coment[]
+  likes   Like[]
+
+  @@map("posts")
+}
+
+model Coment {
+  id        Int      @id @default(autoincrement())
+  publicId  String   @unique @default(uuid()) @map("public_id")
+  conteudo  String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  usuarioId Int     @map("usuario_id")
+  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  postId Int
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  likes Like[]
+
+  @@map("coments")
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  publicId  String   @unique @default(uuid()) @map("public_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  usuarioId Int     @map("usuario_id")
+  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  postId Int?
+  post   Post? @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  comentId Int?
+  coment   Coment? @relation(fields: [comentId], references: [id], onDelete: Cascade)
+
+  @@unique([usuarioId, postId])
+  @@unique([usuarioId, comentId])
+  @@map("likes")
+}
