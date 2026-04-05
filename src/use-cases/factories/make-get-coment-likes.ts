@@ -1,6 +1,6 @@
-import { PrismaLikesRepository } from "@/repositories/prisma/likes-prisma-repository.js"
-import { GetComentLikesUseCase } from "../likes/get-coment-likes.js"
-import { PrismaComentsRepository } from "@/repositories/prisma/coments-prisma-repository.js"
+import { PrismaComentsRepository } from '@/repositories/prisma/coments-prisma-repository.js'
+import { PrismaLikesRepository } from '@/repositories/prisma/likes-prisma-repository.js'
+import { GetComentLikesUseCase } from '../likes/get-coment-likes.js'
 
 export function makeGetComentLikesUseCase() {
   const comentsRepository = new PrismaComentsRepository()

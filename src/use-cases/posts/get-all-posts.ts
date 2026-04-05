@@ -1,4 +1,4 @@
-import type { PostsRepository } from "@/repositories/posts-repository.js"
+import type { PostsRepository } from '@/repositories/posts-repository.js'
 
 export class GetAllPostsUseCase {
   constructor(private postsRepository: PostsRepository) {}

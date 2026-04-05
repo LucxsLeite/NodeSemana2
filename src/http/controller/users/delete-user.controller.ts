@@ -1,7 +1,7 @@
-import type { FastifyRequest, FastifyReply } from "fastify"
-import { z } from "zod"
-import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error.js"
-import { makeDeleteUserUseCase } from "@/use-cases/factories/make-delete-user.js"
+import type { FastifyReply, FastifyRequest } from 'fastify'
+import { z } from 'zod'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error.js'
+import { makeDeleteUserUseCase } from '@/use-cases/factories/make-delete-user.js'
 
 export async function deleteUser(request: FastifyRequest, reply: FastifyReply) {
   try {
@@ -12,12 +12,12 @@ export async function deleteUser(request: FastifyRequest, reply: FastifyReply) {
 
     const deleteUserUseCase = makeDeleteUserUseCase()
 
-    await deleteUserUseCase.execute({publicId})
+    await deleteUserUseCase.execute({ publicId })
 
     return reply.status(204).send()
   } catch (error) {
     if (error instanceof ResourceNotFoundError) {
-      return reply.status(404).send({ message: error.message})
+      return reply.status(404).send({ message: error.message })
     }
     throw error
   }

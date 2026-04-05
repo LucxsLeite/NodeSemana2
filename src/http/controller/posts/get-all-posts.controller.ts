@@ -1,8 +1,11 @@
-import type { FastifyRequest, FastifyReply } from "fastify"
-import { PostPresenter } from "@/http/presenters/post-presenter.js"
-import { makeGetAllPostsUseCase } from "@/use-cases/factories/make-get-all-posts.js"
+import type { FastifyReply, FastifyRequest } from 'fastify'
+import { PostPresenter } from '@/http/presenters/post-presenter.js'
+import { makeGetAllPostsUseCase } from '@/use-cases/factories/make-get-all-posts.js'
 
-export async function getAllPosts(_request: FastifyRequest, reply: FastifyReply) {
+export async function getAllPosts(
+  _request: FastifyRequest,
+  reply: FastifyReply,
+) {
   try {
     const getAllPostsUseCase = makeGetAllPostsUseCase()
 

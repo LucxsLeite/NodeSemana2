@@ -1,4 +1,4 @@
-import type { PostWithUser } from "@/repositories/posts-repository.js"
+import type { PostWithUser } from '@/repositories/posts-repository.js'
 
 type HTTPPost = {
   id: string
@@ -18,11 +18,9 @@ type HTTPPost = {
 export class PostPresenter {
   static toHTTP(post: PostWithUser): HTTPPost
   static toHTTP(posts: PostWithUser[]): HTTPPost[]
-  static toHTTP(
-    input: PostWithUser | PostWithUser[]
-  ): HTTPPost | HTTPPost[] {
+  static toHTTP(input: PostWithUser | PostWithUser[]): HTTPPost | HTTPPost[] {
     if (Array.isArray(input)) {
-      return input.map((post) => this.toHTTP(post))
+      return input.map((post) => PostPresenter.toHTTP(post))
     }
 
     return {

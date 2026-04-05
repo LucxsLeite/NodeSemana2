@@ -1,8 +1,11 @@
-import type { FastifyRequest, FastifyReply } from "fastify"
-import { ComentPresenter } from "@/http/presenters/coment-presenter.js"
-import { makeGetAllComentsUseCase } from "@/use-cases/factories/make-get-all-coments.js"
+import type { FastifyReply, FastifyRequest } from 'fastify'
+import { ComentPresenter } from '@/http/presenters/coment-presenter.js'
+import { makeGetAllComentsUseCase } from '@/use-cases/factories/make-get-all-coments.js'
 
-export async function getAllComents(_request: FastifyRequest, reply: FastifyReply) {
+export async function getAllComents(
+  _request: FastifyRequest,
+  reply: FastifyReply,
+) {
   try {
     const getAllComentsUseCase = makeGetAllComentsUseCase()
 

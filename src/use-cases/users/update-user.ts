@@ -1,8 +1,8 @@
-import type { UsersRepository } from "@/repositories/users-repository.js"
-import { hash } from "bcryptjs"
-import { env } from "@/env/index.js"
-import type { Usuario } from "@/@types/prisma/client.js"
-import { ResourceNotFoundError } from "../errors/resource-not-found-error.js"
+import { hash } from 'bcryptjs'
+import type { Usuario } from '@/@types/prisma/client.js'
+import { env } from '@/env/index.js'
+import type { UsersRepository } from '@/repositories/users-repository.js'
+import { ResourceNotFoundError } from '../errors/resource-not-found-error.js'
 
 interface UpdateUserUseCaseRequest {
   publicId: string
@@ -24,25 +24,25 @@ export class UpdateUserUseCase {
     senha,
     nome,
     email,
-    foto
+    foto,
   }: UpdateUserUseCaseRequest): Promise<UpdateUserUseCaseResponse> {
-    const userToUpdate = await this.usersRepository.getUser({publicId})
+    const userToUpdate = await this.usersRepository.getUser({ publicId })
 
     if (!userToUpdate) {
       throw new ResourceNotFoundError()
     }
 
-    let senhaHash: string | undefined
+    let _senhaHash: string | undefined
 
     if (senha) {
-      senhaHash = await hash(senha, env.HASH_SALT_ROUNDS)
+      _senhaHash = await hash(senha, env.HASH_SALT_ROUNDS)
     }
 
     const updatedUser = await this.usersRepository.updateUser(userToUpdate.id, {
       nome,
       email,
       foto,
-      senha
+      senha,
     })
 
     return { user: updatedUser }

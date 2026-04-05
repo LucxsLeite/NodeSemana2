@@ -1,6 +1,6 @@
-import { PrismaPostsRepository } from "@/repositories/prisma/posts-prisma-repository.js"
-import { GetUserPostsUseCase } from "../posts/get-user-posts.js"
-import { PrismaUsersRepository } from "@/repositories/prisma/users-prisma-repository.js"
+import { PrismaPostsRepository } from '@/repositories/prisma/posts-prisma-repository.js'
+import { PrismaUsersRepository } from '@/repositories/prisma/users-prisma-repository.js'
+import { GetUserPostsUseCase } from '../posts/get-user-posts.js'
 
 export function makeGetUserPostsUseCase() {
   const usersRepository = new PrismaUsersRepository()

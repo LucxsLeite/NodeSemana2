@@ -1,13 +1,16 @@
-import type { FastifyRequest, FastifyReply } from "fastify"
-import { z } from "zod"
-import { makeGetComentLikesUseCase } from "@/use-cases/factories/make-get-coment-likes.js"
-import { LikePresenter } from "@/http/presenters/like-presenter.js"
-import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error.js"
+import type { FastifyReply, FastifyRequest } from 'fastify'
+import { z } from 'zod'
+import { LikePresenter } from '@/http/presenters/like-presenter.js'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error.js'
+import { makeGetComentLikesUseCase } from '@/use-cases/factories/make-get-coment-likes.js'
 
-export async function getComentLikes(request: FastifyRequest, reply: FastifyReply) {
+export async function getComentLikes(
+  request: FastifyRequest,
+  reply: FastifyReply,
+) {
   try {
     const paramsSchema = z.object({
-      comentPublicId: z.string().uuid()
+      comentPublicId: z.string().uuid(),
     })
 
     const { comentPublicId } = paramsSchema.parse(request.params)
@@ -15,10 +18,10 @@ export async function getComentLikes(request: FastifyRequest, reply: FastifyRepl
     const getComentLikesUseCase = makeGetComentLikesUseCase()
 
     const likes = await getComentLikesUseCase.execute({
-      comentPublicId
+      comentPublicId,
     })
 
-    return reply.status(200).send((LikePresenter.toHTTP(likes)))
+    return reply.status(200).send(LikePresenter.toHTTP(likes))
   } catch (error) {
     if (error instanceof ResourceNotFoundError) {
       return reply.status(404).send({ message: error.message })

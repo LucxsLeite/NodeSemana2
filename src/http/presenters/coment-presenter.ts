@@ -1,4 +1,4 @@
-import type { ComentWithAll } from "@/repositories/coments-repository.js"
+import type { ComentWithAll } from '@/repositories/coments-repository.js'
 
 type HTTPComent = {
   id: string
@@ -21,9 +21,11 @@ type HTTPComent = {
 export class ComentPresenter {
   static toHTTP(coment: ComentWithAll): HTTPComent
   static toHTTP(coments: ComentWithAll[]): HTTPComent[]
-  static toHTTP(input: ComentWithAll | ComentWithAll[]): HTTPComent | HTTPComent[] {
+  static toHTTP(
+    input: ComentWithAll | ComentWithAll[],
+  ): HTTPComent | HTTPComent[] {
     if (Array.isArray(input)) {
-      return input.map((coment) => this.toHTTP(coment))
+      return input.map((coment) => ComentPresenter.toHTTP(coment))
     }
 
     return {

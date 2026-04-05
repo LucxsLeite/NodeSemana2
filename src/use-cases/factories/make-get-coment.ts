@@ -1,9 +1,9 @@
-import { PrismaComentsRepository } from "@/repositories/prisma/coments-prisma-repository.js";
-import { GetComentUseCase } from "../coments/get-coment.js";
+import { PrismaComentsRepository } from '@/repositories/prisma/coments-prisma-repository.js'
+import { GetComentUseCase } from '../coments/get-coment.js'
 
 export function makeGetComentUseCase() {
-    const comentRepository = new PrismaComentsRepository()
-    const getComentUseCase = new GetComentUseCase(comentRepository)
+  const comentRepository = new PrismaComentsRepository()
+  const getComentUseCase = new GetComentUseCase(comentRepository)
 
-    return getComentUseCase
+  return getComentUseCase
 }

@@ -1,18 +1,18 @@
-import type { Usuario } from "@/@types/prisma/client.js"
-import { hash } from "bcryptjs"
-import { env } from "@/env/index.js"
-import { ItemAlreadyExistsError } from "../errors/item-already-exists-error.js";
-import type { UsersRepository } from "@/repositories/users-repository.js";
+import { hash } from 'bcryptjs'
+import type { Usuario } from '@/@types/prisma/client.js'
+import { env } from '@/env/index.js'
+import type { UsersRepository } from '@/repositories/users-repository.js'
+import { ItemAlreadyExistsError } from '../errors/item-already-exists-error.js'
 
 interface RegisterUserUseCaseRequest {
-    nome: string;
-    email: string;
-    senha: string;
-    foto: string | null;
+  nome: string
+  email: string
+  senha: string
+  foto: string | null
 }
 
 type RegisterUserUseCaseResponse = {
-    user: Usuario
+  user: Usuario
 }
 
 export class RegisterUserUseCase {

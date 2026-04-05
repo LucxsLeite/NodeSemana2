@@ -1,8 +1,8 @@
-import { ResourceNotFoundError } from "../errors/resource-not-found-error.js"
-import type { LikesRepository } from "@/repositories/likes-repository.js"
-import type { PostsRepository } from "@/repositories/posts-repository.js"
-import type { ComentsRepository } from "@/repositories/coments-repository.js"
-import type { UsersRepository } from "@/repositories/users-repository.js"
+import type { ComentsRepository } from '@/repositories/coments-repository.js'
+import type { LikesRepository } from '@/repositories/likes-repository.js'
+import type { PostsRepository } from '@/repositories/posts-repository.js'
+import type { UsersRepository } from '@/repositories/users-repository.js'
+import { ResourceNotFoundError } from '../errors/resource-not-found-error.js'
 
 interface CreateLikeUseCaseRequest {
   usuarioPublicId: string
@@ -11,16 +11,20 @@ interface CreateLikeUseCaseRequest {
 }
 
 export class CreateLikeUseCase {
-  constructor(private likesRepository: LikesRepository, private usersRepository: UsersRepository, private postsRepository: PostsRepository,private comentsRepository: ComentsRepository) {}
+  constructor(
+    private likesRepository: LikesRepository,
+    private usersRepository: UsersRepository,
+    private postsRepository: PostsRepository,
+    private comentsRepository: ComentsRepository,
+  ) {}
 
   async execute({
     usuarioPublicId,
     postPublicId,
     comentPublicId,
   }: CreateLikeUseCaseRequest) {
-    
     if (!!postPublicId === !!comentPublicId) {
-      throw new Error("Like deve ser em post OU comentário.")
+      throw new Error('Like deve ser em post OU comentário.')
     }
 
     const user = await this.usersRepository.getUser({

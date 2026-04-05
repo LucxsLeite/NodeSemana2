@@ -1,8 +1,8 @@
-import type { FastifyReply, FastifyRequest } from "fastify"
-import { z } from "zod"
-import { PostPresenter } from "@/http/presenters/post-presenter.js"
-import { makeUpdatePostUseCase } from "@/use-cases/factories/make-update-post.js"
-import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error.js"
+import type { FastifyReply, FastifyRequest } from 'fastify'
+import { z } from 'zod'
+import { PostPresenter } from '@/http/presenters/post-presenter.js'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error.js'
+import { makeUpdatePostUseCase } from '@/use-cases/factories/make-update-post.js'
 
 export async function updatePost(request: FastifyRequest, reply: FastifyReply) {
   try {
@@ -30,8 +30,8 @@ export async function updatePost(request: FastifyRequest, reply: FastifyReply) {
     return reply.status(200).send(PostPresenter.toHTTP(post))
   } catch (error) {
     if (error instanceof ResourceNotFoundError) {
-              return reply.status(404).send({ message: error.message})
-            }
-            throw error
+      return reply.status(404).send({ message: error.message })
+    }
+    throw error
   }
 }

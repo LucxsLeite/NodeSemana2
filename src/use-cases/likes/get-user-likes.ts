@@ -1,17 +1,18 @@
-import type { LikesRepository } from "@/repositories/likes-repository.js"
-import { ResourceNotFoundError } from "../errors/resource-not-found-error.js"
-import type { UsersRepository } from "@/repositories/users-repository.js"
+import type { LikesRepository } from '@/repositories/likes-repository.js'
+import type { UsersRepository } from '@/repositories/users-repository.js'
+import { ResourceNotFoundError } from '../errors/resource-not-found-error.js'
 
 interface GetUserLikesUseCaseRequest {
   usuarioPublicId: string
 }
 
 export class GetUserLikesUseCase {
-  constructor(private likesRepository: LikesRepository, private usersRepository: UsersRepository) {}
+  constructor(
+    private likesRepository: LikesRepository,
+    private usersRepository: UsersRepository,
+  ) {}
 
-  async execute({
-    usuarioPublicId,
-  }: GetUserLikesUseCaseRequest) {
+  async execute({ usuarioPublicId }: GetUserLikesUseCaseRequest) {
     const user = await this.usersRepository.getUser({
       publicId: usuarioPublicId,
     })
@@ -20,7 +21,7 @@ export class GetUserLikesUseCase {
       throw new ResourceNotFoundError()
     }
     const likes = await this.likesRepository.findLikesByUser(user.id)
-    
+
     return likes
   }
 }

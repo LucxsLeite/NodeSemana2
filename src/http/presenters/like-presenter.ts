@@ -1,4 +1,4 @@
-import type { LikeWithAll } from "@/repositories/likes-repository.js"
+import type { LikeWithAll } from '@/repositories/likes-repository.js'
 
 type HTTPLike = {
   id: string
@@ -18,7 +18,7 @@ export class LikePresenter {
   static toHTTP(likes: LikeWithAll[]): HTTPLike[]
   static toHTTP(input: LikeWithAll | LikeWithAll[]): HTTPLike | HTTPLike[] {
     if (Array.isArray(input)) {
-      return input.map((like) => this.toHTTP(like))
+      return input.map((like) => LikePresenter.toHTTP(like))
     }
 
     return {
@@ -31,7 +31,7 @@ export class LikePresenter {
         id: input.usuario.publicId,
         nome: input.usuario.nome,
         foto: input.usuario.foto,
-      }
+      },
     }
   }
 }

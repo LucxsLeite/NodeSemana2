@@ -1,17 +1,18 @@
-import type { PostsRepository } from "@/repositories/posts-repository.js"
-import { ResourceNotFoundError } from "../errors/resource-not-found-error.js"
-import type { UsersRepository } from "@/repositories/users-repository.js"
+import type { PostsRepository } from '@/repositories/posts-repository.js'
+import type { UsersRepository } from '@/repositories/users-repository.js'
+import { ResourceNotFoundError } from '../errors/resource-not-found-error.js'
 
 interface GetUserPostsUseCaseRequest {
   usuarioPublicId: string
 }
 
 export class GetUserPostsUseCase {
-  constructor(private postsRepository: PostsRepository, private usersRepository: UsersRepository) {}
+  constructor(
+    private postsRepository: PostsRepository,
+    private usersRepository: UsersRepository,
+  ) {}
 
-  async execute({
-    usuarioPublicId,
-  }: GetUserPostsUseCaseRequest) {
+  async execute({ usuarioPublicId }: GetUserPostsUseCaseRequest) {
     const user = await this.usersRepository.getUser({
       publicId: usuarioPublicId,
     })
@@ -20,7 +21,7 @@ export class GetUserPostsUseCase {
       throw new ResourceNotFoundError()
     }
     const posts = await this.postsRepository.findPostsByUser(user.id)
-    
+
     return posts
   }
 }

@@ -1,4 +1,4 @@
-import type { ComentsRepository } from "@/repositories/coments-repository.js"
+import type { ComentsRepository } from '@/repositories/coments-repository.js'
 
 interface UpdateComentUseCaseRequest {
   postId: number
@@ -12,7 +12,7 @@ export class UpdateComentUseCase {
     const comentExists = await this.comentsRepository.getComent({ id: postId })
 
     if (!comentExists) {
-      throw new Error("Comentário não encontrado")
+      throw new Error('Comentário não encontrado')
     }
 
     const data: any = {}

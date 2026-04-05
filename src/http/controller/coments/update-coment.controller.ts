@@ -1,17 +1,20 @@
-import type { FastifyReply, FastifyRequest } from "fastify"
-import { z } from "zod"
-import { ComentPresenter } from "@/http/presenters/coment-presenter.js"
-import { makeUpdateComentUseCase } from "@/use-cases/factories/make-update-coment.js"
-import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error.js"
+import type { FastifyReply, FastifyRequest } from 'fastify'
+import { z } from 'zod'
+import { ComentPresenter } from '@/http/presenters/coment-presenter.js'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error.js'
+import { makeUpdateComentUseCase } from '@/use-cases/factories/make-update-coment.js'
 
-export async function updateComent(request: FastifyRequest, reply: FastifyReply) {
+export async function updateComent(
+  request: FastifyRequest,
+  reply: FastifyReply,
+) {
   try {
     const paramsSchema = z.object({
       id: z.coerce.number().int().positive(),
     })
 
     const bodySchema = z.object({
-      conteudo: z.string().trim().min(1)
+      conteudo: z.string().trim().min(1),
     })
 
     const { id } = paramsSchema.parse(request.params)
@@ -28,7 +31,7 @@ export async function updateComent(request: FastifyRequest, reply: FastifyReply)
     return reply.status(200).send(ComentPresenter.toHTTP(coment))
   } catch (error) {
     if (error instanceof ResourceNotFoundError) {
-        return reply.status(404).send({ message: error.message})
+      return reply.status(404).send({ message: error.message })
     }
     throw error
   }

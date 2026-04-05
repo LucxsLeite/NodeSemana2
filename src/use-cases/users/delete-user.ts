@@ -1,5 +1,5 @@
-import type { UsersRepository } from "@/repositories/users-repository.js"
-import { ResourceNotFoundError } from "../errors/resource-not-found-error.js"
+import type { UsersRepository } from '@/repositories/users-repository.js'
+import { ResourceNotFoundError } from '../errors/resource-not-found-error.js'
 
 interface DeleteUserUseCaseRequest {
   publicId: string
@@ -8,10 +8,8 @@ interface DeleteUserUseCaseRequest {
 export class DeleteUserUseCase {
   constructor(private usersRepository: UsersRepository) {}
 
-  async execute({
-     publicId,
-   }: DeleteUserUseCaseRequest) {
-    const user = await this.usersRepository.getUser({publicId})
+  async execute({ publicId }: DeleteUserUseCaseRequest) {
+    const user = await this.usersRepository.getUser({ publicId })
 
     if (!user) {
       throw new ResourceNotFoundError()

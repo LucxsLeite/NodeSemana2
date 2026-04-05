@@ -1,4 +1,4 @@
-import type { PostsRepository } from "@/repositories/posts-repository.js"
+import type { PostsRepository } from '@/repositories/posts-repository.js'
 
 interface UpdatePostUseCaseRequest {
   postId: number
@@ -13,7 +13,7 @@ export class UpdatePostUseCase {
     const postExists = await this.postsRepository.getPost({ id: postId })
 
     if (!postExists) {
-      throw new Error("Post não encontrado")
+      throw new Error('Post não encontrado')
     }
 
     const data: any = {}
