@@ -14,12 +14,15 @@ datasource db {
 }
 
 model Usuario {
-  id        Int       @id @default(autoincrement())
-  publicId  String    @unique @default(uuid()) @map("public_id")
+  id        Int     @id @default(autoincrement())
+  publicId  String  @unique @default(uuid()) @map("public_id")
   nome      String
-  email     String    @unique
-  senhaHash String    @map("senha_hash")
+  email     String  @unique
+  senhaHash String  @map("senha_hash")
   foto      String?
+
+  token          String?   @unique
+  tokenExpiresAt DateTime? @map("token_expires_at")
 
   posts   Post[]
   coments Coment[]

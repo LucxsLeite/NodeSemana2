@@ -6,9 +6,11 @@ import { getAllUsers } from './get-all-users.controller.js'
 import { getUser } from './get-user.controller.js'
 import { register } from './register.controller.js'
 import { updateUser } from './update-user.controller.js'
+import { recoverPassword } from './recover-password.controller.js'
 
 export async function userRoutes(app: FastifyInstance) {
   app.post('/', register)
+  app.post('/recover-password', recoverPassword)
   app.post('/authenticate', authenticate)
   app.get('/:publicId', getUser)
   app.get('/', getAllUsers)

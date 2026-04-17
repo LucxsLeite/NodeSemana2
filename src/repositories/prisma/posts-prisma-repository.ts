@@ -1,5 +1,5 @@
 import type { Prisma } from '@/@types/prisma/client.js'
-import { prisma } from '@/libs/prisma.js'
+import { prisma } from '@/lib/prisma/prisma.js'
 import type { PostsRepository, PostWithUser } from '../posts-repository.js'
 
 export class PrismaPostsRepository implements PostsRepository {
