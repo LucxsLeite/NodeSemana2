@@ -3,6 +3,7 @@ import fastify from 'fastify'
 import { ZodError } from 'zod'
 import { env } from './env/index.js'
 import { appRoutes } from './http/controller/routes.js'
+import { startTrendingPostsJob } from './jobs/trending-posts-job.js'
 
 export const app = fastify()
 
@@ -26,3 +27,5 @@ app.setErrorHandler((error, _request, reply) => {
     })
   }
 })
+
+startTrendingPostsJob()

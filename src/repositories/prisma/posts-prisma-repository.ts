@@ -43,4 +43,48 @@ export class PrismaPostsRepository implements PostsRepository {
       include: { usuario: true, coments: true, likes: true },
     })
   }
+  async getTrendingPosts(since: Date): Promise<PostWithUser[]> {
+  const topPosts = await prisma.like.groupBy({
+    by: ['postId'],
+    where: {
+      createdAt: {
+        gte: since,
+      },
+    },
+    _count: {
+      postId: true,
+    },
+    orderBy: {
+      _count: {
+        postId: 'desc',
+      },
+    },
+    take: 3,
+  })
+
+  if (topPosts.length === 0) return []
+
+  const postIds = topPosts
+    .map(p => p.postId)
+    .filter((id): id is number => id !== null)
+
+  const posts = await prisma.post.findMany({
+    where: {
+      id: {
+        in: postIds,
+      },
+    },
+    include: {
+      usuario: true,
+      coments: true,
+      likes: true,
+    },
+  })
+
+  const sortedPosts = topPosts
+    .map(tp => posts.find(p => p.id === tp.postId))
+    .filter((p): p is PostWithUser => Boolean(p))
+
+  return sortedPosts
+}
 }

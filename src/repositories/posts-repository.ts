@@ -19,4 +19,5 @@ export interface PostsRepository {
   deletePost(id: number): Promise<void>
   updatePost(id: number, data: Prisma.PostUpdateInput): Promise<PostWithUser>
   findPostsByUser(usuarioId: number): Promise<PostWithUser[]>
+  getTrendingPosts(since: Date): Promise<PostWithUser[]>
 }

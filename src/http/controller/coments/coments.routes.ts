@@ -8,7 +8,7 @@ import { getPostComents } from './get-post-coments.controller.js'
 import { getUserComents } from './get-user-coments.controller.js'
 import { updateComent } from './update-coment.controller.js'
 
-export async function postRoutes(app: FastifyInstance) {
+export async function comentRoutes(app: FastifyInstance) {
   app.post('/', { onRequest: [verifyJwt] }, createComent)
   app.get('/:publicId', getComent)
   app.get('/user/:publicId', getUserComents)

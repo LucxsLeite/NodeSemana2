@@ -11,7 +11,7 @@ export async function getAllUsers(
 
     const { users } = await getAllUsersUseCase.execute()
 
-    return reply.status(201).send(UserPresenter.toHTTP(users))
+    return reply.status(200).send(UserPresenter.toHTTP(users))
   } catch (error) {
     throw error
   }

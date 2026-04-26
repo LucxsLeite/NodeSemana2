@@ -19,7 +19,7 @@ export class GetPostLikesUseCase {
     if (!post) {
       throw new ResourceNotFoundError()
     }
-    const likes = await this.likesRepository.findLikesByUser(post.id)
+    const likes = await this.likesRepository.findLikesByPost(post.id)
 
     return likes
   }

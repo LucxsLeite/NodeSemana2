@@ -7,7 +7,7 @@ import { getLike } from './get-like.controller.js'
 import { getPostLikes } from './get-post-likes.controller.js'
 import { getUserLikes } from './get-user-likes.controller.js'
 
-export async function postRoutes(app: FastifyInstance) {
+export async function likeRoutes(app: FastifyInstance) {
   app.post('/', { onRequest: [verifyJwt] }, createLike)
   app.get('/:publicId', getLike)
   app.get('/user/:publicId', getUserLikes)

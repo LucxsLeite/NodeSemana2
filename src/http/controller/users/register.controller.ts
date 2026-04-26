@@ -8,7 +8,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
   try {
     const registerBodySchema = z.object({
       nome: z.string().trim().min(1).max(32),
-      email: z.email().trim(),
+      email: z.string().email().trim(),
       senha: z.string().min(8).max(16),
       foto: z.string().min(1).nullable(),
     })
@@ -29,5 +29,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     if (error instanceof ItemAlreadyExistsError) {
       return reply.status(409).send({ message: error.message })
     }
+    console.error(error)
+    return reply.status(500).send({ message: 'Internal server error' })
   }
 }

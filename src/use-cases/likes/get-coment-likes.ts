@@ -19,7 +19,7 @@ export class GetComentLikesUseCase {
     if (!coment) {
       throw new ResourceNotFoundError()
     }
-    const likes = await this.likesRepository.findLikesByUser(coment.id)
+    const likes = await this.likesRepository.findLikesByComent(coment.id)
 
     return likes
   }
