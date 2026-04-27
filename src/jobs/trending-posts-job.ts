@@ -12,7 +12,7 @@ export function startTrendingPostsJob() {
     }
   })
 
-  cron.schedule('* * * * *', async () => {
+  cron.schedule('0 0 * * *', async () => {
     try {
       console.log('Rodando job...')
 
