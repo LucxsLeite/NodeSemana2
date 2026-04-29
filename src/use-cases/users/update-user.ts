@@ -32,17 +32,17 @@ export class UpdateUserUseCase {
       throw new ResourceNotFoundError()
     }
 
-    let _senhaHash: string | undefined
+    let senhaHash: string | undefined
 
     if (senha) {
-      _senhaHash = await hash(senha, env.HASH_SALT_ROUNDS)
+      senhaHash = await hash(senha, env.HASH_SALT_ROUNDS)
     }
 
     const updatedUser = await this.usersRepository.updateUser(userToUpdate.id, {
       nome,
       email,
       foto,
-      senha,
+      senha: senhaHash,
     })
 
     return { user: updatedUser }

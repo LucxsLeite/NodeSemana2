@@ -26,6 +26,10 @@ app.setErrorHandler((error, _request, reply) => {
       message: 'O corpo da requisição não está em formato válido',
     })
   }
+
+  return reply.status(500).send({
+    message: 'Internal server error',
+  })
 })
 
 startTrendingPostsJob()

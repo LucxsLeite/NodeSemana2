@@ -65,7 +65,7 @@ export class PrismaPostsRepository implements PostsRepository {
     if (topPosts.length === 0) return []
 
     const postIds = topPosts
-      .map((p) => p.postId)
+      .map((p: (typeof topPosts)[number]) => p.postId)
       .filter((id): id is number => id !== null)
 
     const posts = await prisma.post.findMany({
@@ -82,7 +82,9 @@ export class PrismaPostsRepository implements PostsRepository {
     })
 
     const sortedPosts = topPosts
-      .map((tp) => posts.find((p) => p.id === tp.postId))
+      .map((tp: (typeof topPosts)[number]) =>
+        posts.find((p: PostWithUser) => p.id === tp.postId),
+      )
       .filter((p): p is PostWithUser => Boolean(p))
 
     return sortedPosts
