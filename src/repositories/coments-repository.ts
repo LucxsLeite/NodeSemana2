@@ -1,10 +1,4 @@
-import type {
-  Coment,
-  Like,
-  Post,
-  Prisma,
-  Usuario,
-} from '@prisma/client'
+import type { Coment, Like, Post, Prisma, Usuario } from '@prisma/client'
 
 export type ComentWithAll = Coment & {
   usuario: Usuario
