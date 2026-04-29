@@ -1,5 +1,5 @@
-import { sendEmail } from "@/utils/send-email.js"
-import nodemailer from 'nodemailer'
+import type nodemailer from 'nodemailer'
+import { sendEmail } from '@/utils/send-email.js'
 
 interface SendEmailUseCaseRequest {
   to: string
@@ -10,7 +10,13 @@ interface SendEmailUseCaseRequest {
 }
 
 export class SendEmailUseCase {
-  async execute({ to, subject, message, html, attachments }: SendEmailUseCaseRequest) {
+  async execute({
+    to,
+    subject,
+    message,
+    html,
+    attachments,
+  }: SendEmailUseCaseRequest) {
     return await sendEmail({ to, subject, message, html, attachments })
   }
 }

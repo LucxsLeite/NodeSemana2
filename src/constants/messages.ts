@@ -3,7 +3,8 @@ export const messages = {
     invalidData: 'Dados de registro inválidos!',
     userAlreadyExists: 'Já existe um usuário cadastrado com este CPF ou E-mail',
     invalidCpf: 'CPF inválido!',
-    invalidJson: 'O corpo da requisição não está em formato JSON válido. Verifique a estrutura dos dados enviados.',
+    invalidJson:
+      'O corpo da requisição não está em formato JSON válido. Verifique a estrutura dos dados enviados.',
     passwordTooShort: 'A senha deve ter pelo menos 8 caracteres.',
     passwordTooLong: 'A senha deve ter no máximo 64 caracteres.',
     passwordUppercase: 'A senha deve conter pelo menos uma letra maiúscula.',
@@ -19,10 +20,12 @@ export const messages = {
     forbidden: 'Acesso negado!',
     unauthorized: 'Não autorizado!',
     invalidToken: 'Token inválido ou expirado!',
-    passwordChangeRequired: 'É necessário alterar a senha antes de acessar o sistema!',
+    passwordChangeRequired:
+      'É necessário alterar a senha antes de acessar o sistema!',
   },
   info: {
-    passwordResetGeneric: 'Se o usuário existir, você receberá um e-mail com instruções para redefinir a senha.',
+    passwordResetGeneric:
+      'Se o usuário existir, você receberá um e-mail com instruções para redefinir a senha.',
   },
   email: {
     passwordRecoverySubject: 'Recuperação de senha',
