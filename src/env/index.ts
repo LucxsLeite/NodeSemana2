@@ -5,13 +5,17 @@ const envSchema = z.object({
   NODE_ENV: z
     .enum(['development', 'staging', 'production'])
     .default('development'),
-  LOG_LEVEL: z.enum(['info', 'debug', 'warn', 'error', 'trace']).default('info'),
+  LOG_LEVEL: z
+    .enum(['info', 'debug', 'warn', 'error', 'trace'])
+    .default('info'),
   PORT: z.coerce.number().int().min(1024).max(65535).default(3333),
   HOST: z.string().default('0.0.0.0'),
   DATABASE_URL: z.string(),
   APP_NAME: z.string().default('Backend Template Reborn'),
   APP_PORT: z.coerce.number().default(3000),
-  JWT_SECRET: z.string().min(60, 'JWT secret must be at least 60 characters long'),
+  JWT_SECRET: z
+    .string()
+    .min(60, 'JWT secret must be at least 60 characters long'),
   FRONTEND_URL: z.url().default('http://localhost:5173'),
   HASH_SALT_ROUNDS: z.coerce.number().default(12),
   SMTP_EMAIL: z.email(),

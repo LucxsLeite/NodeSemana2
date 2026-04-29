@@ -1,8 +1,8 @@
-import { emailSchema } from '@/http/schemas/utils/email.js'
+import { randomBytes } from 'node:crypto'
 import type { Usuario } from '@/@types/prisma/client.js'
+import { emailSchema } from '@/http/schemas/utils/email.js'
 import type { UsersRepository } from '@/repositories/users-repository.js'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error.js'
-import { randomBytes } from 'crypto'
 
 interface RecoverPasswordUseCaseRequest {
   login: string
@@ -19,7 +19,9 @@ const TOKEN_LENGTH = 32
 export class RecoverPasswordUseCase {
   constructor(private usersRepository: UsersRepository) {}
 
-  async execute({ login }: RecoverPasswordUseCaseRequest): Promise<RecoverPasswordUseCaseResponse> {
+  async execute({
+    login,
+  }: RecoverPasswordUseCaseRequest): Promise<RecoverPasswordUseCaseResponse> {
     let userExists: Usuario | null = null
 
     if (emailSchema.safeParse(login).success) {

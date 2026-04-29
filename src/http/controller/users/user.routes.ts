@@ -4,9 +4,9 @@ import { authenticate } from './authenticate.controller.js'
 import { deleteUser } from './delete-user.controller.js'
 import { getAllUsers } from './get-all-users.controller.js'
 import { getUser } from './get-user.controller.js'
+import { recoverPassword } from './recover-password.controller.js'
 import { register } from './register.controller.js'
 import { updateUser } from './update-user.controller.js'
-import { recoverPassword } from './recover-password.controller.js'
 
 export async function userRoutes(app: FastifyInstance) {
   app.post('/', register)

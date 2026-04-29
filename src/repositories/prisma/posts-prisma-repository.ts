@@ -44,47 +44,47 @@ export class PrismaPostsRepository implements PostsRepository {
     })
   }
   async getTrendingPosts(since: Date): Promise<PostWithUser[]> {
-  const topPosts = await prisma.like.groupBy({
-    by: ['postId'],
-    where: {
-      createdAt: {
-        gte: since,
+    const topPosts = await prisma.like.groupBy({
+      by: ['postId'],
+      where: {
+        createdAt: {
+          gte: since,
+        },
       },
-    },
-    _count: {
-      postId: true,
-    },
-    orderBy: {
       _count: {
-        postId: 'desc',
+        postId: true,
       },
-    },
-    take: 3,
-  })
-
-  if (topPosts.length === 0) return []
-
-  const postIds = topPosts
-    .map(p => p.postId)
-    .filter((id): id is number => id !== null)
-
-  const posts = await prisma.post.findMany({
-    where: {
-      id: {
-        in: postIds,
+      orderBy: {
+        _count: {
+          postId: 'desc',
+        },
       },
-    },
-    include: {
-      usuario: true,
-      coments: true,
-      likes: true,
-    },
-  })
+      take: 3,
+    })
 
-  const sortedPosts = topPosts
-    .map(tp => posts.find(p => p.id === tp.postId))
-    .filter((p): p is PostWithUser => Boolean(p))
+    if (topPosts.length === 0) return []
 
-  return sortedPosts
-}
+    const postIds = topPosts
+      .map((p) => p.postId)
+      .filter((id): id is number => id !== null)
+
+    const posts = await prisma.post.findMany({
+      where: {
+        id: {
+          in: postIds,
+        },
+      },
+      include: {
+        usuario: true,
+        coments: true,
+        likes: true,
+      },
+    })
+
+    const sortedPosts = topPosts
+      .map((tp) => posts.find((p) => p.id === tp.postId))
+      .filter((p): p is PostWithUser => Boolean(p))
+
+    return sortedPosts
+  }
 }
