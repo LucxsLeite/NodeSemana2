@@ -1,5 +1,5 @@
 import { hash } from 'bcryptjs'
-import type { Usuario } from '@/@types/prisma/client.js'
+import type { Usuario } from '@prisma/client'
 import { env } from '@/env/index.js'
 import type { UsersRepository } from '@/repositories/users-repository.js'
 import { ItemAlreadyExistsError } from '../errors/item-already-exists-error.js'

@@ -4,7 +4,7 @@ import type {
   Post,
   Prisma,
   Usuario,
-} from '@/@types/prisma/client.js'
+} from '@prisma/client'
 
 export type LikeWithAll = Like & {
   usuario: Usuario

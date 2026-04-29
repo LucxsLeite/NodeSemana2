@@ -1,4 +1,4 @@
-import type { Prisma } from '@/@types/prisma/client.js'
+import type { Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma/prisma.js'
 import type { LikesRepository, LikeWithAll } from '../likes-repository.js'
 

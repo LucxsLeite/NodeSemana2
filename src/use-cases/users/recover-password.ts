@@ -1,5 +1,5 @@
 import { randomBytes } from 'node:crypto'
-import type { Usuario } from '@/@types/prisma/client.js'
+import type { Usuario } from '@prisma/client'
 import { emailSchema } from '@/http/schemas/utils/email.js'
 import type { UsersRepository } from '@/repositories/users-repository.js'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error.js'

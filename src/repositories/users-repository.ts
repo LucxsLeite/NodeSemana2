@@ -1,4 +1,4 @@
-import type { Prisma, Usuario } from '@/@types/prisma/client.js'
+import type { Prisma, Usuario } from '@prisma/client'
 
 export interface UsersRepository {
   createUser(data: Prisma.UsuarioCreateInput): Promise<Usuario>
