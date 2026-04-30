@@ -38,17 +38,17 @@ jobs:
 
       - name: Install Dependencies
         run: npm ci
+      
+      - name: Generate Prisma Client
+        env:
+          DATABASE_URL: ${{ env.DUMMY_DATABASE_URL }}
+        run: npx prisma generate
 
       - name: Run Linter
         run: npm run lint
 
       - name: Type Check
         run: npx tsc --noEmit
-
-      - name: Generate Prisma Client
-        env:
-          DATABASE_URL: ${{ env.DUMMY_DATABASE_URL }}
-        run: npx prisma generate
 
       - name: Build
         env:
