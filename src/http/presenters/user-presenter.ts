@@ -1,4 +1,4 @@
-import type { Usuario } from '@/@types/prisma/client.js'
+import type { Usuario } from '@prisma/client'
 
 type HTTPUser = {
   id: string

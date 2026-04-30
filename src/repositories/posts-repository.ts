@@ -1,10 +1,4 @@
-import type {
-  Coment,
-  Like,
-  Post,
-  Prisma,
-  Usuario,
-} from '@/@types/prisma/client.js'
+import type { Coment, Like, Post, Prisma, Usuario } from '@prisma/client'
 
 export type PostWithUser = Post & {
   usuario: Usuario
